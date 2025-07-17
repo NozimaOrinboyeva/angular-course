@@ -1,0 +1,18 @@
+<!-- <p class="paragraph">{{carName}}</p>
+<ul>
+    <li>{{car.id}}</li>
+    <li>{{car.name}}</li>
+    <li>{{car.year}}</li>
+</ul> -->
+
+<div>
+    <input type="text" placeholder="Enter car name" [(ngModel)]="carName">
+    <input type="date" placeholder="Enter car year" [(ngModel)]="carYear">
+    <button (click)="onSubmit()">Add</button>
+</div>
+
+<ul>
+    @for(car of cars; track car.id){
+        <li>{{car.name}} | {{ car.year }}   <button (click)="onDelete(car)">Delete</button></li> 
+    }
+</ul>
