@@ -1,10 +1,10 @@
 import { Component, signal } from '@angular/core';
-import { CarList } from './car-list/car-list';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  template: ` <app-car-list></app-car-list> `,
-  imports: [CarList],
+  templateUrl: 'app.html',
+  imports: [RouterOutlet, RouterLink],
 })
 export class App {
   protected title = ' angular-course';

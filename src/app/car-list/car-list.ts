@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Car } from '../models/car';
 import { Data } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -9,7 +9,12 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './car-list.html',
   styleUrl: './car-list.css'
 })
-export class CarList {
+export class CarList  implements OnInit {
+  ngOnInit(): void {
+    // console.log('Saytga kirdi.') localda ishlashi 
+    const savedCars = localStorage.getItem('cars');
+    this.cars= savedCars ?   JSON.parse(savedCars): [];
+  }
   carName: string = '';
   carYear: Date = new Date();
 
