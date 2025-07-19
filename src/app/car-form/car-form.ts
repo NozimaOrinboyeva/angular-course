@@ -1,13 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CarService } from '../serviecs/car.service';
 
 @Component({
   selector: 'app-car-form',
   imports: [ReactiveFormsModule],
   templateUrl: './car-form.html',
-  styleUrl: './car-form.css'
+  styleUrl: './car-form.css',
+  standalone: true,
 })
 export class CarForm {
+  carService = inject(CarService);
   reservationForm: FormGroup = new FormGroup({
     checkIn: new FormControl('', [Validators.required]),
     checkOut: new FormControl('', [Validators.required]),
@@ -19,6 +22,9 @@ export class CarForm {
   })
 
   onSubmit(){
+    const data = { ...this.reservationForm.value, id: Date.now() };
+    this.carService.addReservation(data);
+    this.reservationForm.reset();
     // console.log('Form submitted:', this.reservationForm.value);
   }
 

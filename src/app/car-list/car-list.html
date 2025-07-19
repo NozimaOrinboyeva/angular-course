@@ -1,11 +1,11 @@
+<!-- birinchi dars uchun practis -->
 <!-- <p class="paragraph">{{carName}}</p>
 <ul>
     <li>{{car.id}}</li>
     <li>{{car.name}}</li>
     <li>{{car.year}}</li>
 </ul> -->
-
-<div class="cantainer">
+<!-- <div class="cantainer">
     <div class="card mt-3">
         <div class="row">
             <div class="col">
@@ -34,11 +34,41 @@
             <div class="input-group flex-nowrap">
                 <input type="text" class="list-grup-item d-flex justify-content-between align-items-center" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">{{car.name}} | {{ car.year }}  <button (click)="onDelete(car)" class="btn btn-danger btn-sm">Delete</button>
               </div>
-            <!-- <li class="list-grup-item d-flex justify-content-between align-items-center">{{car.name}} | {{ car.year }}   <button (click)="onDelete(car)" class="btn btn-danger btn-sm">Delete</button>
-            </li>  -->
         }
     </ul>
 
 
-</div>
+</div> -->
 
+
+
+<h3>Reservetion List</h3>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Car</th>
+            <th>Check In</th>
+            <th>Check Out</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (item of ReservationList; track item.id) {
+            <tr>
+                <td>{{item.clientName}}</td>
+                <td>{{item.clientEmail}}</td>
+                <td>{{item.carModel}} | {{item.carNumber}}</td>
+                <td>{{ item.checkIn | date:'short'}}</td>
+                <td>{{item.checkOut | date:'short'}}</td>
+                <td>
+                    <button class="btn btn-sm btn-danger mx-1">Delete</button>
+                    <button class="btn btn-sm btn-secondary mx-1">Edit</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

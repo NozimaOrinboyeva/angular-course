@@ -23,7 +23,6 @@
 
 
     <div class="row mb-3">
-        <div class="row mb-3">
             <div class="col">
                 <label class="form-label">Client name: </label>
                 <input type="text" class="form-control" formControlName="clientName">
@@ -33,11 +32,9 @@
                 <label class="form-label">Client email: </label>
                 <input type="email" class="form-control" formControlName="clientEmail">
             </div>
-        </div>
     </div>
 
     <div class="row mb-3">
-        <div class="row mb-3">
             <div class="col">
                 <label class="form-label">Car madel: </label>
                 <input type="text" class="form-control" formControlName="carModel">
@@ -45,10 +42,9 @@
     
             <div class="col">
                 <label class="form-label">Car number: </label>
-                <input type="number" class="form-control" formControlName="carNumber ">
+                <input type="number" class="form-control" formControlName="carNumber">
             </div>
-        </div>
     </div>
 
-    <button class="btn btn-primary" type="submit" [disabled]="reservationForm.invalid">Submit</button>
+    <button class="btn btn-primary" type="submit">Submit</button>
 </form>
