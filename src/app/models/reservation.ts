@@ -2,8 +2,8 @@ export interface Reservation {
     id:number;
     checkIn: Date;
     checkOut: Date;
-    ClientName:string;
-    ClientEmail: string;
+    clientName:string;
+    clientEmail: string;
     carModel:string;
-    CarNumber: number;
+    carNumber: number;
 }

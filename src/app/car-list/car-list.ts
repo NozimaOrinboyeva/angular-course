@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Car } from '../models/car';
-import { Data } from '@angular/router';
+import { Data, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CarService } from '../serviecs/car.service';
 import { Reservation } from '../models/reservation';
@@ -8,7 +8,7 @@ import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-car-list',
-  imports: [DatePipe],
+  imports: [DatePipe,RouterLink],
   templateUrl: './car-list.html',
   styleUrl: './car-list.css',
   standalone: true,
@@ -16,11 +16,19 @@ import { DatePipe } from '@angular/common';
 export class CarList  implements OnInit {
   reservationList: Reservation[] =[];
   reservetionService = inject(CarService);
-   
+
+  constructor() {
+    console.log(this.reservetionService.getReservations());
+  }
   ngOnInit(): void {
+    this.reservationList = this.reservetionService.getReservations();
+  }
+
+  deleteReservation(id: number): void {
+    this.reservetionService.deleteReservation(id);
     this.reservationList = this.reservetionService.getReservations();
   }
   
 
-  ReservationList: any[]=[];
+  // ReservationList: any[]=[];
 }

@@ -57,18 +57,24 @@
         </tr>
     </thead>
     <tbody>
-        @for (item of ReservationList; track item.id) {
+        @if(reservationList.length === 0) {
             <tr>
-                <td>{{item.clientName}}</td>
-                <td>{{item.clientEmail}}</td>
-                <td>{{item.carModel}} | {{item.carNumber}}</td>
-                <td>{{ item.checkIn | date:'short'}}</td>
-                <td>{{item.checkOut | date:'short'}}</td>
-                <td>
-                    <button class="btn btn-sm btn-danger mx-1">Delete</button>
-                    <button class="btn btn-sm btn-secondary mx-1">Edit</button>
-                </td>
+                <td colspan="6" class="text-center">No reservation found</td>
             </tr>
+        } @else {
+            @for (item of reservationList; track item.id) {
+                <tr>
+                    <td>{{item.clientName}}</td>
+                    <td>{{item.clientEmail}}</td>
+                    <td>{{item.carModel}} | {{item.carNumber}}</td>
+                    <td>{{ item.checkIn | date:'short'}}</td>
+                    <td>{{item.checkOut | date:'short'}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger mx-1" (click)="deleteReservation(item.id)">Delete</button>
+                        <button class="btn btn-sm btn-secondary mx-1" [routerLink]="['/edit', item.id]">Edit</button>
+                    </td>
+                </tr>
+            }
         }
     </tbody>
 </table>
