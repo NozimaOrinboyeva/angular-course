@@ -1,29 +1,33 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Reservation } from '../models/reservation';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CarService {
   private reservations: Reservation[] =[];
+  private http = inject(HttpClient);
+  private apiUrl = 'http://localhost:3000';
 
-  constructor() {
-    const savedReservations = localStorage.getItem('reservations');
-    this.reservations = savedReservations ? JSON.parse(savedReservations) : [];
-  }
+  // constructor() {
+  //   const savedReservations = localStorage.getItem('reservations');
+  //   this.reservations = savedReservations ? JSON.parse(savedReservations) : [];
+  // }
 
-  getReservations(): Reservation[] {
-    return this.reservations;
+  getReservations(): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(`${this.apiUrl}/reservations`)
   }  
 
-  getReservationById(id: number): Reservation | undefined {
-    return this.reservations.find((reservation) => reservation.id === id);
+  getReservationById(id: number): Observable<Reservation>  {
+    return this.http.get<Reservation>(`${this.apiUrl}/reservations/${id}`);
   }
   
-  addReservation(reservation: Reservation): void {
-    this.reservations.push(reservation);
-    const savedReservations = localStorage.getItem('reservations');
+  addReservation(reservation: Reservation): Observable<Reservation> {
+    return this.http.post<Reservation>(this.apiUrl, reservation);
   }
+  
 
   deleteReservation(id: number): void {
     this.reservations = this.reservations.filter(

@@ -1,0 +1,22 @@
+{
+    "reservations": [
+        {
+            "id": "1",
+            "checkIn": "2025-06-17",
+            "checkOut": "2025-06-17",
+            "clientEmail": "orinboyeva@gmail.com",
+            "clientName": "nozi",
+            "carModel": "Malibu",
+            "carNumber": "017"
+        },
+        {
+            "id": "2",
+            "checkIn": "2025-03-02",
+            "checkOut": "2025-03-02",
+            "clientEmail": "orinboyev@gmail.com",
+            "clientName": "gayrat",
+            "carModel": "Tayota",
+            "carNumber": "495"
+        }
+    ]
+}

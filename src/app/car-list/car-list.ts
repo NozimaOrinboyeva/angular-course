@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { Car } from '../models/car';
 import { Data, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -16,17 +16,33 @@ import { DatePipe } from '@angular/common';
 export class CarList  implements OnInit {
   reservationList: Reservation[] =[];
   reservetionService = inject(CarService);
+  cdr = inject(ChangeDetectorRef);
 
-  constructor() {
-    console.log(this.reservetionService.getReservations());
-  }
+  // constructor() {
+  //   console.log(this.reservetionService.getReservations());
+  // }
   ngOnInit(): void {
-    this.reservationList = this.reservetionService.getReservations();
+    this.loadReservations();
+    // this.reservationList = this.reservetionService.getReservations();
+  }
+
+
+  loadReservations(): void{ 
+    this.reservetionService.getReservations().subscribe({
+       next: (data: Reservation[]) => {
+        // console.log(data);
+        this.reservationList = data;
+        this.cdr.detectChanges();
+       },
+       error: (err) => {
+        console.log(err);
+       },
+    });
   }
 
   deleteReservation(id: number): void {
-    this.reservetionService.deleteReservation(id);
-    this.reservationList = this.reservetionService.getReservations();
+    // this.reservetionService.deleteReservation(id);
+    // this.reservationList = this.reservetionService.getReservations();
   }
   
 

@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CarService } from '../serviecs/car.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -25,22 +25,44 @@ export class CarForm {
 
   })
   // editni ishlatish
-  constructor() {
-    const reservationId = this.activatedRoute.snapshot.paramMap.get('id');
-    if(reservationId) {
-      const reservation = this.carService.getReservationById(+reservationId);
-      if(reservation) {
+  // constructor() {
+  //   const reservationId = this.activatedRoute.snapshot.paramMap.get('id');
+  //   if(reservationId) {
+  //     const reservation = this.carService.getReservationById(+reservationId).subscribe({
+  //       next: (data) => {
+  //         this.reservationForm.patchValue({
+  //           checkIn: reservation.checkIn,
+  //           checkOut: reservation.checkOut,
+  //           clientName:reservation.clientName,
+  //           clientEmail:reservation.clientEmail,
+  //           carModel:reservation.carModel,
+  //           carNumber:reservation.carNumber,
+  //         });
+  //       },
+  //     });
+  //   }
+  // }
+  constructor(private fb: FormBuilder) {
+  const reservationId = this.activatedRoute.snapshot.paramMap.get('id');
+  if (reservationId) {
+    this.carService.getReservationById(+reservationId).subscribe({
+      next: (reservation) => {
         this.reservationForm.patchValue({
           checkIn: reservation.checkIn,
           checkOut: reservation.checkOut,
-          clientName:reservation.clientName,
-          clientEmail:reservation.clientEmail,
-          carModel:reservation.carModel,
-          carNumber:reservation.carNumber,
+          clientName: reservation.clientName,
+          clientEmail: reservation.clientEmail,
+          carModel: reservation.carModel,
+          carNumber: reservation.carNumber,
         });
+      },
+      error: (err) => {
+        console.error('Xatolik:', err);
       }
-    }
+    });
   }
+}
+
 
   // constructor() {
   //   console.log(this.activatedRoute.snapshot.params)
@@ -51,13 +73,21 @@ export class CarForm {
     if(reservationId){
       const reservation = this.carService.getReservationById(+reservationId);
       if(reservation) {
-        this.carService.updateReservation (+reservationId, {...this.reservationForm.value, id: +reservationId,});
+        this.carService.updateReservation (+reservationId, 
+          {...this.reservationForm.value, id: +reservationId,});
         this.router.navigate(['/list']);
       }
     } else{
       const data = { ...this.reservationForm.value, id: Date.now() };
-      this.carService.addReservation(data);
-      this.reservationForm.reset();
+      this.carService.addReservation(data).subscribe({
+        next: () => {
+          this.reservationForm.reset();
+          this.router.navigate(['/list']);
+        },
+        error: (err: any) => {
+          console.log("error massseg", err);
+        },
+      });
     }
     // console.log('Form submitted:', this.reservationForm.value);
   }
