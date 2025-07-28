@@ -1,0 +1,21 @@
+<div class="container">
+    <h1 >Product List</h1>
+    <mat-grid-list cols="3" rowHeight="2:1" gutterSize="16px">
+        @for (item of product(); track item.id) {
+            <mat-grid-tile>
+                <mat-card class="product-card" appearance="outlined" (click)="addCart(item)">
+                    <mat-card-header>
+                      <mat-card-title-group>
+                        <mat-card-title>{{ item.title | trouncate:50 }}</mat-card-title>
+                        <mat-card-subtitle>{{item.category}}</mat-card-subtitle>
+                        <img mat-card-sm-image [src]="item.image" >
+                      </mat-card-title-group>
+                    </mat-card-header>
+                    <mat-card-content>{{item.description | trouncate: 200}}</mat-card-content>
+                  </mat-card>
+            </mat-grid-tile>
+            }
+    </mat-grid-list>
+    
+     
+</div>
