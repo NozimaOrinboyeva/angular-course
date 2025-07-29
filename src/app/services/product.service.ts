@@ -5,14 +5,13 @@ import { Observable } from 'rxjs';
 import { Product } from '../models/product';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
   private http = inject(HttpClient);
   private apiUrl = environment.apiUrl;
 
-  getProducts(): Observable<Product[]>{ 
+  getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.apiUrl}/products`);
   }
-  
 }

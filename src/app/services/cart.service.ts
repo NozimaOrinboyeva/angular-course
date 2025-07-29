@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Cart } from '../models/cart';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
   private http = inject(HttpClient);
@@ -14,7 +14,7 @@ export class CartService {
   getCart(): Observable<Cart[]> {
     return this.http.get<Cart[]>(`${this.apiUrl}/cart`);
   }
-  
+
   addToCart(cart: Omit<Cart, 'id'>): Observable<Cart> {
     return this.http.post<Cart>(`${this.apiUrl}/cart`, cart);
   }
@@ -28,6 +28,6 @@ export class CartService {
   }
 
   clearCart(): Observable<void> {
-    return this,this.http.delete<void>(`${this.apiUrl}/cart`);
+    return this.http.delete<void>(`${this.apiUrl}/cart`);
   }
 }

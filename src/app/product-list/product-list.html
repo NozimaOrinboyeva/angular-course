@@ -1,6 +1,10 @@
-
-<ul>
+<div class="container">
+  <h1>Product List</h1>
+  <mat-grid-list cols="3" rowHeight="2:1">
     @for (item of productList(); track item.id) {
-        <li>{{item.title}}</li>
+    <mat-grid-tile>
+      <app-product-card [item]="item"></app-product-card>
+    </mat-grid-tile>
     }
-</ul>
+  </mat-grid-list>
+</div>

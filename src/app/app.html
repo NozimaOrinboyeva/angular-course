@@ -1,13 +1,8 @@
-<!-- Navbar  -->
- <mat-toolbar style="background-color: rgb(229, 232, 240);">
-    <a routerLink="/product" class="logo">E-Shop</a>
-    <span class="example-spacer"></span>
-    <a routerLink="/product" matButton>Product</a>
-    <a routerLink="/cart" matButton>Cart</a>
- </mat-toolbar>
+<app-navbar></app-navbar>
 
- <div class="container text-center" style="text-align-last: center;">
-    <h1>Welcome to E-SHop</h1>
-    <p>Your one-stop shop for all your needs!</p>
- </div>
+<div class="container text-center" style="margin-left: 500px;">
+  <h1>Welcome to E-Shop</h1>
+  <p>Your one-stop shop for all your needs!</p>
+</div>
+
 <router-outlet></router-outlet>

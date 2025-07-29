@@ -1,7 +1,7 @@
-import { Product } from "../24-dars/product/product";
+import { Product } from './product';
 
 export interface Cart {
-    id: string;
-    product: Product;
-    quantity: number;
+  id: string;
+  product: Product;
+  quantity: number;
 }
