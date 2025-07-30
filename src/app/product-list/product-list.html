@@ -1,5 +1,19 @@
 <div class="container">
   <h1>Product List</h1>
+  <div class="example-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Search products</mat-label>
+      <input matInput placeholder="Enter product name">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Category</mat-label>
+      <mat-select>
+        <mat-option value="option">Option</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
   <mat-grid-list cols="3" rowHeight="2:1">
     @for (item of productList(); track item.id) {
     <mat-grid-tile>
